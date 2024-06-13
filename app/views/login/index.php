@@ -25,5 +25,10 @@
 		</fieldset>
 		</form> 
 	</div>
+	<div>
+		<p>
+			<a href="/create/index">Create an account</a>
+		</p>
+	</div>
 </div>
     <?php require_once 'app/views/templates/footer.php' ?>
