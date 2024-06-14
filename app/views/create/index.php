@@ -3,14 +3,14 @@
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
-                <h1>You are not logged in</h1>
+                <h1>Create an Account</h1>
             </div>
         </div>
     </div>
 
 <div class="row">
     <div class="col-sm-auto">
-    <form action="/login/verify" method="post" >
+    <form action="/create/verify" method="post" >
     <fieldset>
       <div class="form-group">
         <label for="username">Username</label>
@@ -21,11 +21,11 @@
         <input required type="password" class="form-control" name="password">
       </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input required type="password" class="form-control" name="password">
+            <label for="confirm_password">Confirm Password</label>
+            <input required type="password" class="form-control" name="confirm_password">
           </div>
             <br>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Create</button>
     </fieldset>
     </form> 
   </div>

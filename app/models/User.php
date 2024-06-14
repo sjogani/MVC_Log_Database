@@ -46,5 +46,28 @@ class User {
 			die;
 		}
     }
+    public function check($username, $password, $confirm_password){
+      $db = db_connect();
+      $statement = $db->prepare("select * from users WHERE username = :name;");
+      $statement->bindValue(':name', $username);
+      $statement->execute();
+      $rows = $statement->fetch(PDO::FETCH_ASSOC);
+      if($rows) {
+        return "Username already exists";
+      }
+      else {
+        if($password == $confirm_password) {
+          $password = password_hash($password, PASSWORD_DEFAULT);
+          $statement = $db->prepare("INSERT INTO users (username, password) VALUES (:username, :password);");
+          $statement->bindValue(':username', $username);
+          $statement->bindValue(':password', $password);
+          $statement->execute();
+          return "Account created";
+        }
+        else {
+          return "Passwords do not match";
+        }
 
+      }
+    }
 }
