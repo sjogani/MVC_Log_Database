@@ -62,7 +62,7 @@ class User {
           $statement->bindValue(':username', $username);
           $statement->bindValue(':password', $password);
           $statement->execute();
-          return "Account created";
+          $this->authenticate($username, $password);
         }
         else {
           return "Passwords do not match";

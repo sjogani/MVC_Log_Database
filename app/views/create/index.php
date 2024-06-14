@@ -10,6 +10,12 @@
 
 <div class="row">
     <div class="col-sm-auto">
+        <?php
+            if (isset($data['message']) && !empty($data['message'])) {
+            echo '<p>' . htmlspecialchars($data['message']) . '</p>';
+        }
+        ?>
+
     <form action="/create/verify" method="post" >
     <fieldset>
       <div class="form-group">
