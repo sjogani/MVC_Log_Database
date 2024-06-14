@@ -6,6 +6,10 @@ class Create extends Controller {
       $this->view('create/index', $data);
     }
 
+    public function success(){
+      $this->view('create/success');
+    }
+
     public function verify(){
     $username = $_REQUEST['username'];
     $password = $_REQUEST['password'];
@@ -14,7 +18,9 @@ class Create extends Controller {
     $user = $this->model('User');
     $result = $user->check($username, $password, $confirm_password); 
 
-    
+    if($result == "Account created"){
+      $this->success();
+    }else
     $this->index(['message' => $result]);
     }
 }

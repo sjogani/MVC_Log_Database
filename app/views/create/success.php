@@ -10,7 +10,7 @@
 
 <div class="row">
     <div class="col-sm-auto">
-        <p> <a href="/login/index" Click here to login</p>
+        <a href="/login/index">Click here to Login</a>
   </div>
 </div>
     <?php require_once 'app/views/templates/footer.php' ?>
