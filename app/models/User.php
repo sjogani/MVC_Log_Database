@@ -34,7 +34,7 @@ class User {
           $_SESSION['auth'] = 1;
           $_SESSION['username'] = ucwords($username);
           unset($_SESSION['failedAuth']);
-          $this->logAttempt($username, 'good'); // Log successful attempt
+          return 'good'; // Log successful attempt
           header('Location: /home');
           exit();
       } 
@@ -44,7 +44,7 @@ class User {
           } else {
               $_SESSION['failedAuth'] = 1;
           }
-          $this->logAttempt($username, 'bad'); // Log failed attempt
+          return 'bad'; // Log failed attempt
           header('Location: /login');
 			    exit;
 		}
@@ -75,18 +75,23 @@ class User {
     }
 
     public function logAttempt($username, $attempt) {
+        
         $db = db_connect();
+
         $currentdate = date("Y-m-d H:i:s");
-        $statement = $db->prepare("INSERT INTO logs (username, attempt, time) VALUES (:username, :attemptStatus, :currentdate)" );
+        $statement = $db->prepare("INSERT INTO logs (username, attempt, time) VALUES (:username, :attempt, :time);");
         $statement->bindValue(':username', $username);
-        $statement->bindValue(':attemptStatus', $attemptStatus);
+        $statement->bindValue(':attempt', $attempt);
         $statement->bindValue(':time', $currentdate);
-        try {
-            $statement->execute();
-            // Optionally, you can log to a file or perform additional actions here
-        } catch (PDOException $e) {
-            // Handle exception, e.g., log to error log or display a message
-            error_log("Error logging login attempt: " . $e->getMessage());
+        $statement->execute();
+        if ($attempt == 'good') {
+            header('Location: /home');
+            exit();
+            
+        } else
+        {
+            header('Location: /login');
+            exit();
         }
     }
 }

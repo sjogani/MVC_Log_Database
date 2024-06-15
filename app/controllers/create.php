@@ -20,7 +20,7 @@ class Create extends Controller {
 
     if($result == "Account created"){
       $this->success();
-    }else
+    }else  
     $this->index(['message' => $result]);
     }
 }
